@@ -6,7 +6,7 @@ const isLogin = (req, res, next) => {
   const token = req.headers.authorization?.split(" ")[1];
 
   //? Verify the token
-  jwt.verify(token, "matthewdralnyrrdhsdj", async (err, decoded) => {
+  jwt.verify(token, process.env.JWT_KEY, async (err, decoded) => {
     //add user to req obj
     //get the user id
     const userId = decoded?.user?.id;

@@ -1,3 +1,5 @@
+const dotenv = require("dotenv");
+dotenv.config();
 const http = require("http");
 const express = require("express");
 const usersRouter = require("./routes/users/usersRouter");
@@ -6,6 +8,7 @@ const {
   notFound,
   globalErrHandler,
 } = require("./middlewares/globalErrorHandler");
+const categoriesRouter = require("./routes/categories/categoriesRouter");
 
 //!Server
 const app = express();
@@ -18,6 +21,7 @@ connectDB();
 
 // Routes
 app.use("/api/v1/users", usersRouter);
+app.use("/api/v1/categories", categoriesRouter);
 
 //? Not Found middleware
 app.use(notFound);

@@ -74,7 +74,6 @@ exports.login = asyncHandler(async (req, res) => {
 
 exports.getProfile = asyncHandler(async (req, res) => {
   //! get user id from params
-  console.log(2);
   const id = req.userAuth._id;
   const user = await User.findById(id);
   res.json({
