@@ -9,11 +9,12 @@ const {
 } = require("../../controllers/posts/postsCtrl");
 
 const isLogin = require("../../middlewares/isLogin");
+const checkAccountVerification = require("../../middlewares/isAccountVerified");
 
 const postsRouter = express.Router();
 
 //create
-postsRouter.post("/", isLogin, createPost);
+postsRouter.post("/", isLogin, checkAccountVerification, createPost);
 //getting all
 postsRouter.get("/", isLogin, getPosts);
 //get only 4 posts
