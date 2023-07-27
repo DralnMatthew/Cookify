@@ -1,4 +1,5 @@
 const express = require("express");
+const multer = require("multer");
 const {
   createPost,
   getPost,
@@ -11,12 +12,22 @@ const {
 } = require("../../controllers/posts/postsCtrl");
 
 const isLogin = require("../../middlewares/isLogin");
+const storage = require("../../utils/fileUpload");
 const checkAccountVerification = require("../../middlewares/isAccountVerified");
 
 const postsRouter = express.Router();
 
+//! file upload middleware
+const upload = multer({ storage });
+
 //create
-postsRouter.post("/", isLogin, checkAccountVerification, createPost);
+postsRouter.post(
+  "/",
+  isLogin,
+  checkAccountVerification,
+  upload.single("file"),
+  createPost
+);
 //getting all
 postsRouter.get("/", isLogin, getPosts);
 //get only 4 posts
@@ -34,7 +45,7 @@ postsRouter.put("/:id/post-view-count", isLogin, postViewCount);
 //single
 postsRouter.get("/:id", getPost);
 //update
-postsRouter.put("/:id", isLogin, updatePost);
+postsRouter.put("/:id", isLogin, upload.single("file"), updatePost);
 //delete
 postsRouter.delete("/:id", isLogin, deletePost);
 
