@@ -21,11 +21,6 @@ const UserPosts = ({ posts }) => {
           <h3 className="mb-4 text-3xl font-bold leading-tight tracking-tighter md:text-5xl text-darkCoolGray-900">
             Top Posts [{posts?.length}]
           </h3>
-          <p className="mb-10 text-lg font-medium md:text-xl text-coolGray-500">
-            With our integrated CRM, project management, collaboration and
-            invoicing capabilities, you can manage your business in one secure
-            platform.
-          </p>
         </div>
 
         <div className="flex flex-wrap mb-12 -mx-4 md:mb-20">
