@@ -1,6 +1,7 @@
 const asyncHandler = require("express-async-handler");
 const Category = require("../../model/Category/Category");
 const Post = require("../../model/Post/Post");
+const Comment = require("../../model/Comment/Comment");
 const User = require("../../model/User/User");
 //@desc  Create a post
 //@route POST /api/v1/posts
@@ -135,7 +136,17 @@ exports.getPosts = asyncHandler(async (req, res) => {
 //@route GET /api/v1/posts/:id
 //@access PUBLIC
 exports.getPost = asyncHandler(async (req, res) => {
-  const post = await Post.findById(req.params.id);
+  const post = await Post.findById(req.params.id)
+    .populate("author")
+    .populate("category")
+    .populate({
+      path: "comments",
+      model: "Comment",
+      populate: {
+        path: "author",
+        select: "username",
+      },
+    });
   res.status(201).json({
     status: "success",
     message: "Post successfully fetched",
@@ -148,6 +159,12 @@ exports.getPost = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.deletePost = asyncHandler(async (req, res) => {
+  const postFound = await Post.findById(req.params.id);
+  const isAuthor =
+    req.userAuth?._id.toString() === postFound?.author?._id.toString();
+  if (!isAuthor) {
+    throw new Error("Action denied, you are not the creator of this post");
+  }
   await Post.findByIdAndDelete(req.params.id);
   res.status(201).json({
     status: "success",
@@ -160,10 +177,27 @@ exports.deletePost = asyncHandler(async (req, res) => {
 //@access Private
 
 exports.updatePost = asyncHandler(async (req, res) => {
-  const post = await Post.findByIdAndUpdate(req.params.id, req.body, {
-    new: true,
-    runValidators: true,
-  });
+  //!Check if the post exists
+  const { id } = req.params;
+  const postFound = await Post.findById(id);
+  if (!postFound) {
+    throw new Error("Post not found");
+  }
+  //! image update
+  const { title, category, content } = req.body;
+  const post = await Post.findByIdAndUpdate(
+    id,
+    {
+      image: req?.file?.path ? req?.file?.path : postFound?.image,
+      title: title ? title : postFound?.title,
+      category: category ? category : postFound?.category,
+      content: content ? content : postFound?.content,
+    },
+    {
+      new: true,
+      runValidators: true,
+    }
+  );
   res.status(201).json({
     status: "success",
     message: "post successfully updated",
@@ -176,7 +210,10 @@ exports.updatePost = asyncHandler(async (req, res) => {
 //@access PUBLIC
 
 exports.getPublicPosts = asyncHandler(async (req, res) => {
-  const posts = await Post.find({}).sort({ createdAt: -1 }).limit(4);
+  const posts = await Post.find({})
+    .sort({ createdAt: -1 })
+    .limit(4)
+    .populate("category");
   res.status(201).json({
     status: "success",
     message: "Posts successfully fetched",
@@ -310,7 +347,7 @@ exports.schedule = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc   post  view counta
+//@desc   post view count
 //@route  PUT /api/v1/posts/:id/post-views-count
 //@access Private
 
@@ -324,7 +361,7 @@ exports.postViewCount = asyncHandler(async (req, res) => {
   if (!post) {
     throw new Error("Post not found");
   }
-  //Push thr user into post likes
+  //Push the user into post likes
 
   await Post.findByIdAndUpdate(
     id,
