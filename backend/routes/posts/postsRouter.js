@@ -9,6 +9,9 @@ const {
   getPublicPosts,
   likePost,
   disLikePost,
+  claps,
+  schedule,
+  postViewCount,
 } = require("../../controllers/posts/postsCtrl");
 
 const isLogin = require("../../middlewares/isLogin");
