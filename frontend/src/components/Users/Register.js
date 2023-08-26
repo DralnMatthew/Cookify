@@ -81,7 +81,7 @@ const Register = () => {
           <span className="mb-1 text-coolGray-800 font-medium">Email</span>
           <input
             className="py-3 px-3 leading-5 w-full text-coolGray-400 font-normal border border-coolGray-200 outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 rounded-lg shadow-sm"
-            placeholder="Enter your username"
+            placeholder="Enter your email"
             type="email"
             name="email"
             value={formData.email}

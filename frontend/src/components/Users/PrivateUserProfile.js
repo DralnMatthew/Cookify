@@ -92,7 +92,7 @@ export default function PrivateUserProfile() {
                         </div>
                         {/* Warning */}
 
-                        {!userAuth?.userInfo?.isVerified && (
+                        {!profile?.user?.isVerified && (
                           <button
                             onClick={sendAccVerificationEmailHandler}
                             className="rounded-md mt-6 bg-yellow-50 p-4"

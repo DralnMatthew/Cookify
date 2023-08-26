@@ -271,9 +271,8 @@ export const sendAccVerificationEmailAction = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.put(
+      const { data } = await axios.get(
         `${BASE_URL}/users/account-verification-email`,
-        {},
         config
       );
       return data;
@@ -295,8 +294,9 @@ export const verifyAccountAction = createAsyncThunk(
           Authorization: `Bearer ${token}`,
         },
       };
-      const { data } = await axios.get(
+      const { data } = await axios.put(
         `${BASE_URL}/users/account-verification/${verifyToken}`,
+        {},
         config
       );
       return data;
