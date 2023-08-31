@@ -16,7 +16,7 @@ export default function PrivateNavbar() {
   //!dispatch
   const dispatch = useDispatch();
   const logoutHandler = () => {
-    dispatch(logoutAction());
+    dispatch(logoutActsion());
     //reload
     window.location.reload();
   };

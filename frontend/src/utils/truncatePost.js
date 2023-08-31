@@ -1,5 +1,5 @@
 const truncatePost = (post) => {
-  if (post.lenth <= 100) {
+  if (post.length <= 100) {
     return post;
   } else {
     return post.substring(0, 100) + "...";
