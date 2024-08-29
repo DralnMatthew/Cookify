@@ -35,5 +35,3 @@ npm run build
 printf "Completed.\n\n"
 
 printf "Setup completed successfully!\n"
-
-nvm install --lts

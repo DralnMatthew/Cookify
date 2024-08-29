@@ -42,3 +42,6 @@ Temporary Items
 .idea/
 .DS_Store
 **/.DS_Store
+
+k8s/deployment.yaml
+k8s/service.yaml

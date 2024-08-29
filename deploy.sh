@@ -18,8 +18,8 @@ printf "Completed.\n\n"
 printf "Deploying Cookify To GKE Cluster...\n"
 # kubectl create deployment cookify --image=gcr.io/${GOOGLE_CLOUD_PROJECT}/cookify:1.0.0
 # kubectl expose deployment cookify --type=LoadBalancer --port 80 --target-port 9080
-kubectl apply -f backend/k8s/deployment.yaml
-kubectl apply -f backend/k8s/service.yaml
+kubectl apply -f k8s/deployment.yaml
+kubectl apply -f k8s/service.yaml
 printf "Completed.\n\n"
 
 printf "Please run the following command to find the IP address for the cookify service: kubectl get service cookify\n\n"

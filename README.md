@@ -45,7 +45,7 @@ Visit http://localhost:3000
 
 3. Run `git clone https://github.com/DralnMatthew/Cookify` in Google Shell
 
-4. Create a file `.env` in Cookify/backend, which stores the environment secret data
+4. Like the environment variables in `.env` in Cookify/backend, modify them in `k8s/deployment.example.yaml`. In addition, change `<PROJECT_ID>`
 
 - MONGO_URI=
 - JWT_KEY=
@@ -63,8 +63,4 @@ Visit http://localhost:3000
 
 7. Run `kubectl get service` in Google Shell to get the IP address.
 
-## Update Deployment
-
-1. Run `bash update.sh X` in Google Shell to make deployment on GCP, where X is the version number, like 2, 3, 4...
-
-2. Run `kubectl get service` in Google Shell to get the IP address.
+8. Run `kubectl get pods` in Google Shell to see backend output information

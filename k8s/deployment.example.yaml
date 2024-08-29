@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cookify
+  labels:
+    app: cookify
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cookify
+  template:
+    metadata:
+      labels:
+        app: cookify
+    spec:
+      containers:
+        - name: cookify
+          image: gcr.io/<PROJECT_ID>/cookify:1.0.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 9080
+          env:
+            - name: MONGO_URI
+              value: ""
+            - name: JWT_KEY
+              value: ""
+            - name: GMAIL_USER
+              value: ""
+            - name: GMAIL_PASS
+              value: ""
+            - name: CLOUDINARY_CLOUD_NAME
+              value: ""
+            - name: CLOUDINARY_APIKEY
+              value: ""
+            - name: CLOUDINARY_API_SECRET
+              value: ""
+            - name: BACKEND_URL
+              value: "https://cookify-dralnmatthew.netlify.app"
+            - name: PORT
+              value: "9080"
