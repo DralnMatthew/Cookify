@@ -11,7 +11,7 @@ gcloud services enable cloudbuild.googleapis.com
 printf "Completed.\n\n"
 
 printf "Building Cookify Container...\n"
-cd ~/cookify/backend
+cd ~/Cookify/backend
 gcloud builds submit --tag gcr.io/${GOOGLE_CLOUD_PROJECT}/cookify:1.0.0 .
 printf "Completed.\n\n"
 
