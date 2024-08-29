@@ -18,9 +18,7 @@ const globalErrHandler = (err, req, res, next) => {
 const notFound = (req, res, next) => {
   // const err = new Error(`Cannot find ${req.originalUrl} on the server`);
   // next(err);
-  res.sendFile(
-    path.resolve(__dirname, "..", "..", "frontend", "build", "index.html")
-  );
+  res.sendFile(path.resolve(__dirname, "..", "public", "index.html"));
 };
 
 module.exports = { notFound, globalErrHandler };
