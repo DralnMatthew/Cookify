@@ -1,3 +1,5 @@
+const path = require("path");
+
 const globalErrHandler = (err, req, res, next) => {
   //status
   const status = err?.status ? err?.status : "failed";
@@ -14,8 +16,11 @@ const globalErrHandler = (err, req, res, next) => {
 
 //not found handler
 const notFound = (req, res, next) => {
-  const err = new Error(`Cannot find ${req.originalUrl} on the server`);
-  next(err);
+  // const err = new Error(`Cannot find ${req.originalUrl} on the server`);
+  // next(err);
+  res.sendFile(
+    path.resolve(__dirname, "..", "..", "frontend", "build", "index.html")
+  );
 };
 
 module.exports = { notFound, globalErrHandler };

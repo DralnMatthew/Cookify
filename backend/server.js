@@ -2,6 +2,7 @@ const dotenv = require("dotenv");
 const cors = require("cors");
 dotenv.config();
 const http = require("http");
+const path = require("path");
 const express = require("express");
 const usersRouter = require("./routes/users/usersRouter");
 const connectDB = require("./config/database");
@@ -24,6 +25,8 @@ connectDB();
 
 // cors middleware
 app.use(cors());
+
+app.use(express.static(path.join(__dirname, "..", "frontend", "build")));
 
 // Routes
 app.use("/api/v1/users", usersRouter);
