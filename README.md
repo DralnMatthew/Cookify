@@ -3,9 +3,8 @@
 ## Index
 
 - [Requirements](#requirements)
-- [Usage](#usage)
-- [Initial Deployment](#deployment)
-- [Update Deployment](#update)
+- [Run Locally](#usage)
+- [Run on Cloud](#deployment)
 
 ## Requirements
 
@@ -17,7 +16,7 @@ This project requires:
 - Node.js
 - Google Cloud Platform
 
-## Usage
+## Run Locally
 
 1. Create a file `.env` in `Cookify/backend`, which stores the environment secret data
 
@@ -31,13 +30,15 @@ This project requires:
 - BACKEND_URL=
 - PORT=9080
 
-2. Under `Cookify` folder, open one terminal, and run `cd backend` and `npm install` to install environment for backend. Run `npm start` to start the backend service.
+2. Set `baseURL` in `frontend/src/utils/baseURL.js` to `http://localhost:9080`
 
-3. Under `Cookify` folder, open another terminal, and run `cd frontend` and `npm install` to install environment for frontend. Run `npm start` to start the frontend service.
+3. Under `Cookify` folder, open one terminal, and run `cd backend` and `npm install` to install environment for backend. Run `npm start` to start the backend service.
+
+4. Under `Cookify` folder, open another terminal, and run `cd frontend` and `npm install` to install environment for frontend. Run `npm start` to start the frontend service.
 
 Visit http://localhost:3000
 
-## Initial Deployment
+## Run on Cloud
 
 1. Set your Google Cloud Platform account
 
@@ -45,7 +46,9 @@ Visit http://localhost:3000
 
 3. Run `git clone https://github.com/DralnMatthew/Cookify` in Google Shell
 
-4. Like the environment variables in `.env` in Cookify/backend, modify them in `k8s/deployment.example.yaml`. In addition, change `<PROJECT_ID>`
+4. Set `baseURL` in `frontend/src/utils/baseURL.js` to `/api/v1`
+
+5. Like the environment variables in `.env` in Cookify/backend, modify them in `k8s/deployment.example.yaml`. In addition, change `<PROJECT_ID>`
 
 - MONGO_URI=
 - JWT_KEY=
@@ -57,10 +60,10 @@ Visit http://localhost:3000
 - BACKEND_URL=
 - PORT=9080
 
-5. Run `bash setup.sh` in Google Shell to install environment
+6. Run `bash setup.sh` in Google Shell to install environment
 
-6. Run `bash deploy.sh` in Google Shell to make deployment on GCP
+7. Run `bash deploy.sh` in Google Shell to make deployment on GCP
 
-7. Run `kubectl get service` in Google Shell to get the IP address.
+8. Run `kubectl get service` in Google Shell to get the IP address.
 
-8. Run `kubectl get pods` in Google Shell to see backend output information
+9. Run `kubectl get pods` in Google Shell to see backend output information
