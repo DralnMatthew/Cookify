@@ -1,3 +1,5 @@
+#!/usr/bin/env bash
+
 set -eEo pipefail
 
 if [ -z "$CLOUD_SHELL" ]; then
